@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Page
+    x:Class="MouseCursorSampleApp.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:input="using:Microsoft.UI.Input"
+    xmlns:local="using:MouseCursorSampleApp"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <Style TargetType="local:GridEx">
+            <Setter Property="Padding" Value="20" />
+            <Setter Property="RowSpacing" Value="30" />
+            <Setter Property="BorderThickness" Value="1" />
+        </Style>
+        <Style
+            BasedOn="{StaticResource DefaultToggleSwitchStyle}"
+            TargetType="ToggleSwitch">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="OnContent" Value="Enabled" />
+            <Setter Property="OffContent" Value="Disabled" />
+        </Style>
+        <Style
+            BasedOn="{StaticResource DefaultComboBoxStyle}"
+            TargetType="ComboBox">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="ItemsSource" Value="{x:Bind local:GridEx.CursorOptions}" />
+            <Setter Property="SelectedIndex" Value="0" />
+        </Style>
+    </Page.Resources>
+
+    <!--  Grand parent area  -->
+    <local:GridEx
+        BorderBrush="White"
+        EnableCursorOverride="{x:Bind GrandParentAreaToggleSwitch.IsOn, Mode=OneWay}"
+        InputSystemCursorShape="{x:Bind (input:InputSystemCursorShape)GrandParentAreaComboBox.SelectedValue, Mode=OneWay}"
+        RowDefinitions="Auto,*">
+        <StackPanel
+            Grid.Row="0"
+            Orientation="Horizontal">
+            <ToggleSwitch x:Name="GrandParentAreaToggleSwitch" />
+            <ComboBox
+                x:Name="GrandParentAreaComboBox"
+                IsEnabled="{x:Bind GrandParentAreaToggleSwitch.IsOn, Mode=OneWay}" />
+        </StackPanel>
+
+        <!--  Parent area  -->
+        <local:GridEx
+            Grid.Row="1"
+            BorderBrush="HotPink"
+            EnableCursorOverride="{x:Bind ParentAreaToggleSwitch.IsOn, Mode=OneWay}"
+            InputSystemCursorShape="{x:Bind (input:InputSystemCursorShape)ParentAreaComboBox.SelectedValue, Mode=OneWay}"
+            RowDefinitions="Auto,*">
+            <StackPanel
+                Grid.Row="0"
+                Orientation="Horizontal">
+                <ToggleSwitch x:Name="ParentAreaToggleSwitch" />
+                <ComboBox
+                    x:Name="ParentAreaComboBox"
+                    IsEnabled="{x:Bind ParentAreaToggleSwitch.IsOn, Mode=OneWay}" />
+            </StackPanel>
+            <!--  Child area  -->
+            <local:GridEx
+                Grid.Row="1"
+                BorderBrush="LightGreen"
+                EnableCursorOverride="{x:Bind ChildAreaToggleSwitch.IsOn, Mode=OneWay}"
+                InputSystemCursorShape="{x:Bind (input:InputSystemCursorShape)ChildAreaComboBox.SelectedValue, Mode=OneWay}"
+                RowDefinitions="Auto,*">
+                <StackPanel
+                    Grid.Row="0"
+                    Orientation="Horizontal">
+                    <ToggleSwitch x:Name="ChildAreaToggleSwitch" />
+                    <ComboBox
+                        x:Name="ChildAreaComboBox"
+                        IsEnabled="{x:Bind ChildAreaToggleSwitch.IsOn, Mode=OneWay}" />
+                </StackPanel>
+                <!--  Grand child area  -->
+                <local:GridEx
+                    Grid.Row="1"
+                    BorderBrush="SkyBlue"
+                    EnableCursorOverride="{x:Bind GrandChildAreaToggleSwitch.IsOn, Mode=OneWay}"
+                    InputSystemCursorShape="{x:Bind (input:InputSystemCursorShape)GrandChildAreaComboBox.SelectedValue, Mode=OneWay}"
+                    RowDefinitions="Auto,*">
+                    <StackPanel
+                        Grid.Row="0"
+                        Orientation="Horizontal">
+                        <ToggleSwitch x:Name="GrandChildAreaToggleSwitch" />
+                        <ComboBox
+                            x:Name="GrandChildAreaComboBox"
+                            IsEnabled="{x:Bind GrandChildAreaToggleSwitch.IsOn, Mode=OneWay}" />
+                    </StackPanel>
+                </local:GridEx>
+            </local:GridEx>
+        </local:GridEx>
+    </local:GridEx>
+
+</Page>

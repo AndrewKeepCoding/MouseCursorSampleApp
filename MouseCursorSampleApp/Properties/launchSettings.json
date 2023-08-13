@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "MouseCursorSampleApp (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "MouseCursorSampleApp (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
